@@ -1541,3 +1541,77 @@ code {
     flex-basis: calc((100% - 36px) / 3);
   }
 }
+
+/* Ajustes para notebooks menores, como telas de 13" */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .container {
+    width: min(100% - 36px, 1040px);
+  }
+
+  .hero {
+    padding-top: 124px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .hero-copy {
+    max-width: 780px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+  }
+
+  .hero-copy > p {
+    max-width: 720px;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-visual {
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  .app-preview {
+    max-height: 520px;
+  }
+
+  .benefit-grid,
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proof-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  .tutorial-track .tutorial-card {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+
+  .download-card,
+  .contact-card,
+  .company-card {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-menu {
+    gap: 14px;
+  }
+
+  .nav-menu a {
+    font-size: 0.92rem;
+  }
+}
