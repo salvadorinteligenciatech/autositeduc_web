@@ -34,3 +34,19 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.14 });
 
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+const tutorialTrack = document.querySelector('[data-tutorial-track]');
+const tutorialPrev = document.querySelector('[data-tutorial-prev]');
+const tutorialNext = document.querySelector('[data-tutorial-next]');
+
+function scrollTutorials(direction) {
+  if (!tutorialTrack) return;
+  const distance = tutorialTrack.clientWidth * 0.88;
+  tutorialTrack.scrollBy({
+    left: direction * distance,
+    behavior: 'smooth',
+  });
+}
+
+tutorialPrev?.addEventListener('click', () => scrollTutorials(-1));
+tutorialNext?.addEventListener('click', () => scrollTutorials(1));

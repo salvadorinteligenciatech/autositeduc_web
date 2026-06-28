@@ -1,4 +1,4 @@
-# AutoSITEDUC Landing Page
+# AutoSITEduc Landing Page
 
 Site estático, mobile first, para publicação no GitHub Pages.
 
@@ -10,7 +10,9 @@ Site estático, mobile first, para publicação no GitHub Pages.
 ├── assets/
 │   ├── styles.css
 │   ├── main.js
-│   └── favicon.svg
+│   ├── favicon.svg
+│   ├── logo-autositeduc.png
+│   └── login-tela.jpg
 └── .nojekyll
 ```
 
@@ -26,12 +28,13 @@ Site estático, mobile first, para publicação no GitHub Pages.
 
 ### Ajustes antes de publicar
 
-- Trocar o número do WhatsApp no `index.html`.
 - Confirmar o e-mail oficial de contato.
-- Adicionar prints reais do software quando estiver pronto.
+- Conferir se o formulário Tally incorporado está recebendo respostas corretamente.
+- Adicionar o link real do instalador para Windows 11 na seção de download quando a distribuição estiver pronta.
+- Revisar os valores promocionais da seção de preços antes da publicação oficial.
+- Substituir os cards “Em breve” da seção de tutoriais pelos vídeos reais do YouTube quando estiverem publicados.
 - Criar página de privacidade quando o produto entrar em distribuição pública.
-
 
 ## Tema visual
 
-A página usa a paleta institucional do AutoSITEDUC: azul escuro `#07111f`, painéis `#0b1728`/`#101f35`, azul de marca `#075a9c`, azul de cabeçalho `#1f4e79` e acento laranja `#f28c28`.
+A página usa a paleta institucional do AutoSITEduc: azul escuro `#07111f`, painéis `#0b1728`/`#101f35`, azul de marca `#075a9c`, azul de cabeçalho `#1f4e79` e acento laranja `#f28c28`.
