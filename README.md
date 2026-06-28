@@ -30,3 +30,8 @@ Site estático, mobile first, para publicação no GitHub Pages.
 - Confirmar o e-mail oficial de contato.
 - Adicionar prints reais do software quando estiver pronto.
 - Criar página de privacidade quando o produto entrar em distribuição pública.
+
+
+## Tema visual
+
+A página usa a paleta institucional do AutoSITEDUC: azul escuro `#07111f`, painéis `#0b1728`/`#101f35`, azul de marca `#075a9c`, azul de cabeçalho `#1f4e79` e acento laranja `#f28c28`.
