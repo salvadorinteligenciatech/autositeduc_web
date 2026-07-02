@@ -1391,33 +1391,52 @@ code {
   }
 
   .pricing-card {
-    gap: 14px;
-    padding: 26px;
-    grid-template-rows: auto 74px 74px auto auto auto;
+    gap: 12px;
+    padding: 22px;
+    grid-template-rows: auto 64px 52px auto auto auto;
     align-content: start;
   }
 
   .pricing-badge {
     width: fit-content;
     min-height: unset;
-    padding: 8px 12px;
+    padding: 7px 11px;
     display: block;
     line-height: 1.2;
   }
 
   .pricing-card h3 {
     min-height: 0;
-    font-size: clamp(1.36rem, 1.8vw, 1.62rem);
-    line-height: 1.12;
+    font-size: clamp(1.3rem, 1.7vw, 1.55rem);
+    line-height: 1.1;
   }
 
   .pricing-description {
     min-height: 0;
     align-self: start;
+    line-height: 1.45;
   }
 
   .price-block {
     margin-top: 0;
+    padding: 16px;
+  }
+
+  .price-block strong {
+    font-size: clamp(2.25rem, 4vw, 3.35rem);
+  }
+
+  .pricing-list {
+    gap: 8px;
+  }
+
+  .pricing-list li {
+    line-height: 1.45;
+  }
+
+  .pricing-card-note {
+    padding: 10px 12px;
+    line-height: 1.45;
   }
 }
 
