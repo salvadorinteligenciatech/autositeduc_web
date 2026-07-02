@@ -1686,8 +1686,43 @@ code {
 
   .pricing-grid {
     grid-template-columns: 1fr;
-    max-width: 760px;
+    max-width: 680px;
     margin-inline: auto;
+  }
+
+  .pricing-card {
+    gap: 12px;
+    padding: 22px;
+  }
+
+  .pricing-card h3 {
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    line-height: 1.12;
+  }
+
+  .pricing-description {
+    line-height: 1.45;
+  }
+
+  .price-block {
+    padding: 16px;
+  }
+
+  .price-block strong {
+    font-size: clamp(2.25rem, 7vw, 3.35rem);
+  }
+
+  .pricing-list {
+    gap: 8px;
+  }
+
+  .pricing-list li {
+    line-height: 1.45;
+  }
+
+  .pricing-card-note {
+    padding: 10px 12px;
+    line-height: 1.45;
   }
 
   .tutorial-track .tutorial-card {
