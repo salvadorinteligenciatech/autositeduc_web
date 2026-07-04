@@ -50,3 +50,91 @@ function scrollTutorials(direction) {
 
 tutorialPrev?.addEventListener('click', () => scrollTutorials(-1));
 tutorialNext?.addEventListener('click', () => scrollTutorials(1));
+
+function getBahiaDateParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Bahia',
+    weekday: 'long',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).formatToParts(date);
+
+  return Object.fromEntries(parts.map((part) => [part.type, part.value]));
+}
+
+function shouldBlockTallyForm(date = new Date()) {
+  const bahiaDate = getBahiaDateParts(date);
+  const hour = Number(bahiaDate.hour);
+  const minute = Number(bahiaDate.minute);
+  const minutesSinceMidnight = hour * 60 + minute;
+  const blockStartFriday = 17 * 60 + 30;
+  const blockEndSaturday = 17 * 60 + 30;
+
+  return (
+    (bahiaDate.weekday === 'Friday' && minutesSinceMidnight >= blockStartFriday) ||
+    (bahiaDate.weekday === 'Saturday' && minutesSinceMidnight < blockEndSaturday)
+  );
+}
+
+const saturdayBlockMessage = 'Hoje é sábado! Para adquirir uma assinatura do sistema AutoSITEduc, por gentileza, retorne ao nosso site após o pôr do sol.';
+
+function showSaturdayBlockDialog() {
+  const dialog = document.createElement('div');
+  dialog.className = 'saturday-dialog-backdrop';
+  dialog.setAttribute('role', 'dialog');
+  dialog.setAttribute('aria-modal', 'true');
+  dialog.setAttribute('aria-labelledby', 'saturday-dialog-title');
+
+  dialog.innerHTML = `
+    <div class="saturday-dialog">
+      <strong id="saturday-dialog-title">Atenção</strong>
+      <p>${saturdayBlockMessage}</p>
+      <button type="button" class="saturday-dialog-button">Entendi</button>
+    </div>
+  `;
+
+  document.body.appendChild(dialog);
+
+  const closeButton = dialog.querySelector('.saturday-dialog-button');
+  closeButton?.focus();
+
+  function closeDialog() {
+    dialog.remove();
+    document.removeEventListener('keydown', handleKeydown);
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'Escape') closeDialog();
+  }
+
+  closeButton?.addEventListener('click', closeDialog);
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) closeDialog();
+  });
+  document.addEventListener('keydown', handleKeydown);
+}
+
+function blockTallyFormDuringRestrictedWindow() {
+  const shouldBlock = shouldBlockTallyForm();
+  if (!shouldBlock) return;
+
+  document.querySelectorAll('.tally-embed').forEach((embed) => {
+    const iframe = embed.querySelector('iframe');
+    if (iframe) iframe.remove();
+
+    embed.classList.add('tally-embed-blocked');
+    embed.setAttribute('aria-label', 'Formulário indisponível aos sábados');
+
+    embed.innerHTML = `
+      <div class="saturday-form-block" role="alert" aria-live="polite">
+        <strong>Atenção</strong>
+        <p>${saturdayBlockMessage}</p>
+      </div>
+    `;
+  });
+
+  showSaturdayBlockDialog();
+}
+
+blockTallyFormDuringRestrictedWindow();
