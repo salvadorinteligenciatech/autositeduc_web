@@ -138,3 +138,143 @@ function blockTallyFormDuringRestrictedWindow() {
 }
 
 blockTallyFormDuringRestrictedWindow();
+
+function initializeLaunchCountdown() {
+  const countdown = document.querySelector('[data-launch-countdown]');
+  if (!countdown) return;
+
+  const deadlineValue = countdown.dataset.deadline;
+  const deadline = new Date(deadlineValue);
+
+  const daysElement = countdown.querySelector('[data-countdown-days]');
+  const hoursElement = countdown.querySelector('[data-countdown-hours]');
+  const minutesElement = countdown.querySelector('[data-countdown-minutes]');
+  const secondsElement = countdown.querySelector('[data-countdown-seconds]');
+  const statusElement = countdown.querySelector('[data-countdown-status]');
+  const actionElement = countdown.querySelector('.launch-countdown-action');
+
+  if (
+    Number.isNaN(deadline.getTime()) ||
+    !daysElement ||
+    !hoursElement ||
+    !minutesElement ||
+    !secondsElement
+  ) {
+    console.error('Não foi possível inicializar a contagem regressiva.');
+    countdown.hidden = true;
+    return;
+  }
+
+  let intervalId;
+
+  function formatUnit(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+
+    if (shouldBlockTallyForm(now)) {
+      countdown.hidden = true;
+      return;
+    }
+
+    const remainingMilliseconds = deadline.getTime() - now.getTime();
+
+    if (remainingMilliseconds <= 0) {
+      countdown.hidden = true;
+
+      if (intervalId) {
+        window.clearInterval(intervalId);
+      }
+
+      return false;
+    }
+
+    const totalSeconds = Math.floor(remainingMilliseconds / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    daysElement.textContent = formatUnit(days);
+    hoursElement.textContent = formatUnit(hours);
+    minutesElement.textContent = formatUnit(minutes);
+    secondsElement.textContent = formatUnit(seconds);
+
+    if (statusElement) {
+      statusElement.textContent =
+        'A contagem considera o horário oficial de Salvador, Bahia.';
+    }
+
+    if (actionElement) {
+      actionElement.hidden = false;
+    }
+
+    countdown.hidden = false;
+    countdown.classList.add('is-visible');
+  }
+
+  const shouldContinue = updateCountdown();
+
+  if (shouldContinue !== false) {
+    intervalId = window.setInterval(updateCountdown, 1000);
+  }
+}
+
+initializeLaunchCountdown();
+
+function initializeScheduledPricing() {
+  const pricingGrid = document.querySelector('[data-pricing-grid]');
+  const restrictedMessage = document.querySelector('[data-pricing-restricted-message]');
+  const pricingNote = document.querySelector('[data-pricing-note]');
+  const pricingCards = document.querySelectorAll('[data-pricing-card]');
+
+  if (!pricingGrid || !pricingCards.length) return;
+
+  function updateScheduledPricing() {
+    const now = new Date();
+    const isRestricted = shouldBlockTallyForm(now);
+
+    pricingGrid.hidden = isRestricted;
+
+    if (pricingNote) {
+      pricingNote.hidden = isRestricted;
+    }
+
+    if (restrictedMessage) {
+      restrictedMessage.hidden = !isRestricted;
+    }
+
+    if (isRestricted) return;
+
+    pricingCards.forEach((card) => {
+      const priceChange = new Date(card.dataset.priceChange);
+
+      if (Number.isNaN(priceChange.getTime())) {
+        console.error('Data de alteração de preço inválida.', card);
+        return;
+      }
+
+      const useNewPrice = now.getTime() >= priceChange.getTime();
+      const valueKey = useNewPrice ? 'priceAfter' : 'priceBefore';
+
+      card
+        .querySelectorAll(
+          '[data-price-badge], [data-current-price], [data-monthly-price]'
+        )
+        .forEach((element) => {
+          const value = element.dataset[valueKey];
+
+          if (value) {
+            element.textContent = value;
+          }
+        });
+    });
+  }
+
+  updateScheduledPricing();
+  window.setInterval(updateScheduledPricing, 1000);
+}
+
+initializeScheduledPricing();
