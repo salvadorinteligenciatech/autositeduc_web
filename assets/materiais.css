@@ -1101,3 +1101,92 @@
   .material-card {
   margin: 0;
 }
+
+/* =========================================================
+   Responsividade da página de materiais
+   ========================================================= */
+
+/* Notebooks de 13" e 15" */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .materials-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .materials-hero .hero-copy {
+    max-width: 760px;
+  }
+
+  .materials-hero-preview {
+    width: min(100%, 760px);
+    margin-inline: auto;
+  }
+
+  .subject-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .materials-catalog-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .materials-search {
+    width: min(100%, 620px);
+  }
+
+  .materials-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .material-card,
+  .material-card-content,
+  .material-cover {
+    min-width: 0;
+  }
+
+  .material-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Faixa intermediária comum em notebooks de 13" */
+@media (min-width: 761px) and (max-width: 980px) {
+  .subject-grid,
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .materials-grid {
+    width: min(100%, 720px);
+    margin-inline: auto;
+  }
+}
+
+/* Desktops médios */
+@media (min-width: 1181px) and (max-width: 1440px) {
+  .materials-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+    gap: 38px;
+  }
+
+  .materials-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Monitores maiores */
+@media (min-width: 1681px) {
+  .materials-hero-grid {
+    gap: 64px;
+  }
+
+  .materials-grid {
+    gap: 26px;
+  }
+
+  .material-card-content {
+    padding: 26px;
+  }
+}

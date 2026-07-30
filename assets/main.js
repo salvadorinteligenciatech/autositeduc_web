@@ -33,7 +33,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14 });
 
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+document.querySelectorAll('.reveal').forEach((element) => {
+  if (element.closest('.help-section')) {
+    element.classList.add('is-visible');
+    return;
+  }
+
+  observer.observe(element);
+});
 
 const tutorialTrack = document.querySelector('[data-tutorial-track]');
 const tutorialPrev = document.querySelector('[data-tutorial-prev]');
@@ -278,3 +285,139 @@ function initializeScheduledPricing() {
 }
 
 initializeScheduledPricing();
+
+function initializeHelpCenter() {
+  const searchInput = document.querySelector('[data-help-search]');
+  const searchStatus = document.querySelector('[data-help-search-status]');
+  const expandButton = document.querySelector('[data-help-expand]');
+  const collapseButton = document.querySelector('[data-help-collapse]');
+  const emptyMessage = document.querySelector('[data-help-empty]');
+  const filterButtons = Array.from(
+    document.querySelectorAll('[data-help-filter]')
+  );
+  const groups = Array.from(document.querySelectorAll('.help-group'));
+  const items = Array.from(document.querySelectorAll('[data-help-item]'));
+  let activeFilter = 'all';
+
+  if (!groups.length || !items.length) return;
+
+  function normalizeText(value) {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
+  function updateSearch() {
+    const query = normalizeText(searchInput?.value || '');
+    let visibleItems = 0;
+
+    items.forEach((item) => {
+      const searchableText = normalizeText(
+        `${item.textContent || ''} ${item.dataset.search || ''}`
+      );
+
+      const categories = (item.dataset.helpCategories || '').split(/\s+/);
+      const matchesSearch = !query || searchableText.includes(query);
+      const matchesFilter =
+        activeFilter === 'all' || categories.includes(activeFilter);
+      const matches = matchesSearch && matchesFilter;
+
+      item.hidden = !matches;
+
+      if (matches) {
+        visibleItems += 1;
+
+        if (query || activeFilter !== 'all') {
+          item.open = false;
+        }
+      }
+    });
+
+    groups.forEach((group) => {
+      const visibleChildren = group.querySelectorAll(
+        '[data-help-item]:not([hidden])'
+      );
+
+      group.hidden = visibleChildren.length === 0;
+
+      if ((query || activeFilter !== 'all') && visibleChildren.length > 0) {
+        group.open = true;
+      }
+    });
+
+    if (emptyMessage) {
+      emptyMessage.hidden = visibleItems !== 0;
+    }
+
+    if (searchStatus) {
+      if (!query && activeFilter === 'all') {
+        searchStatus.textContent = '';
+      } else if (visibleItems === 0) {
+        searchStatus.textContent = 'Nenhuma orientação encontrada.';
+      } else if (visibleItems === 1) {
+        searchStatus.textContent = '1 orientação encontrada.';
+      } else {
+        searchStatus.textContent = `${visibleItems} orientações encontradas.`;
+      }
+    }
+  }
+
+  function setAllDetailsOpen(isOpen) {
+    groups.forEach((group) => {
+      if (!group.hidden) {
+        group.open = isOpen;
+      }
+    });
+
+    items.forEach((item) => {
+      if (!item.hidden) {
+        item.open = isOpen;
+      }
+    });
+  }
+
+  searchInput?.addEventListener('input', updateSearch);
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.helpFilter || 'all';
+
+      filterButtons.forEach((currentButton) => {
+        const isActive = currentButton === button;
+        currentButton.classList.toggle('is-active', isActive);
+        currentButton.setAttribute('aria-pressed', String(isActive));
+      });
+
+      updateSearch();
+    });
+  });
+
+  expandButton?.addEventListener('click', () => setAllDetailsOpen(true));
+  collapseButton?.addEventListener('click', () => setAllDetailsOpen(false));
+
+  const targetId = decodeURIComponent(window.location.hash.slice(1));
+  const targetItem = targetId ? document.getElementById(targetId) : null;
+
+  if (targetItem?.matches('[data-help-item]')) {
+    const parentGroup = targetItem.closest('.help-group');
+
+    if (parentGroup) {
+      parentGroup.open = true;
+    }
+
+    targetItem.open = true;
+
+    window.requestAnimationFrame(() => {
+      targetItem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
+  }
+
+  updateSearch();
+}
+
+initializeHelpCenter();
