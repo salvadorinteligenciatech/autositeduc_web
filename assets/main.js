@@ -33,7 +33,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.14 });
 
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+document.querySelectorAll('.reveal').forEach((element) => {
+  if (element.closest('.help-section')) {
+    element.classList.add('is-visible');
+    return;
+  }
+
+  observer.observe(element);
+});
 
 const tutorialTrack = document.querySelector('[data-tutorial-track]');
 const tutorialPrev = document.querySelector('[data-tutorial-prev]');
@@ -285,8 +292,12 @@ function initializeHelpCenter() {
   const expandButton = document.querySelector('[data-help-expand]');
   const collapseButton = document.querySelector('[data-help-collapse]');
   const emptyMessage = document.querySelector('[data-help-empty]');
+  const filterButtons = Array.from(
+    document.querySelectorAll('[data-help-filter]')
+  );
   const groups = Array.from(document.querySelectorAll('.help-group'));
   const items = Array.from(document.querySelectorAll('[data-help-item]'));
+  let activeFilter = 'all';
 
   if (!groups.length || !items.length) return;
 
@@ -307,15 +318,19 @@ function initializeHelpCenter() {
         `${item.textContent || ''} ${item.dataset.search || ''}`
       );
 
-      const matches = !query || searchableText.includes(query);
+      const categories = (item.dataset.helpCategories || '').split(/\s+/);
+      const matchesSearch = !query || searchableText.includes(query);
+      const matchesFilter =
+        activeFilter === 'all' || categories.includes(activeFilter);
+      const matches = matchesSearch && matchesFilter;
 
       item.hidden = !matches;
 
       if (matches) {
         visibleItems += 1;
 
-        if (query) {
-          item.open = true;
+        if (query || activeFilter !== 'all') {
+          item.open = false;
         }
       }
     });
@@ -327,7 +342,7 @@ function initializeHelpCenter() {
 
       group.hidden = visibleChildren.length === 0;
 
-      if (query && visibleChildren.length > 0) {
+      if ((query || activeFilter !== 'all') && visibleChildren.length > 0) {
         group.open = true;
       }
     });
@@ -337,7 +352,7 @@ function initializeHelpCenter() {
     }
 
     if (searchStatus) {
-      if (!query) {
+      if (!query && activeFilter === 'all') {
         searchStatus.textContent = '';
       } else if (visibleItems === 0) {
         searchStatus.textContent = 'Nenhuma orientação encontrada.';
@@ -364,6 +379,21 @@ function initializeHelpCenter() {
   }
 
   searchInput?.addEventListener('input', updateSearch);
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.helpFilter || 'all';
+
+      filterButtons.forEach((currentButton) => {
+        const isActive = currentButton === button;
+        currentButton.classList.toggle('is-active', isActive);
+        currentButton.setAttribute('aria-pressed', String(isActive));
+      });
+
+      updateSearch();
+    });
+  });
+
   expandButton?.addEventListener('click', () => setAllDetailsOpen(true));
   collapseButton?.addEventListener('click', () => setAllDetailsOpen(false));
 
