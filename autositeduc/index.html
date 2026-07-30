@@ -41,6 +41,7 @@
         <a href="#tutoriais">Tutoriais</a>
         <a href="#precos">Preços</a>
         <a href="#download">Download</a>
+        <a href="#ajuda">Ajuda</a>
         <a href="#contato" class="nav-cta">Quero conhecer</a>
       </div>
     </nav>
@@ -510,6 +511,608 @@
           </p>
         </div>
         <a class="button button-ghost" href="#contato">Falar com a empresa</a>
+      </div>
+    </section>
+
+    <section class="section help-section" id="ajuda">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Central de Ajuda</p>
+          <h2>Encontre orientações para usar o AutoSITEduc.</h2>
+          <p>
+            Consulte o passo a passo das principais funcionalidades ou encontre
+            soluções para dúvidas e mensagens apresentadas pelo aplicativo.
+          </p>
+        </div>
+
+        <div class="help-tools reveal">
+          <label class="help-search" for="help-search">
+            <span>Como podemos ajudar?</span>
+            <input
+              id="help-search"
+              type="search"
+              placeholder="Ex.: carregar alunos, importar notas, erro no lançamento..."
+              autocomplete="off"
+              data-help-search
+            />
+          </label>
+
+          <div class="help-actions" aria-label="Controles da Central de Ajuda">
+            <button type="button" class="help-action" data-help-expand>
+              Expandir tudo
+            </button>
+            <button type="button" class="help-action" data-help-collapse>
+              Recolher tudo
+            </button>
+          </div>
+        </div>
+
+        <p class="help-search-status" data-help-search-status aria-live="polite"></p>
+
+        <div class="help-groups" data-help-groups>
+          <details class="help-group reveal">
+            <summary>
+              <span class="help-group-title">
+                <span class="help-group-label">Passo a passo</span>
+                <strong>Como usar o AutoSITEduc</strong>
+              </span>
+            </summary>
+
+            <div class="help-group-content">
+              <details
+                class="help-item"
+                id="ajuda-fazer-login"
+                data-help-item
+                data-search="fazer login entrar email e-mail senha sigeduc formulário contato autorizado autorização"
+              >
+                <summary>Como fazer o login no AutoSITEduc?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    Para entrar no AutoSITEduc, informe o <strong>e-mail</strong> e a
+                    <strong>senha</strong> que você utiliza para acessar o SIGeduc.
+                    Depois, clique no botão <strong>Entrar</strong>.
+                  </p>
+
+                  <section class="help-message help-message-info">
+                    <h4>Use o mesmo e-mail cadastrado</h4>
+                    <p>
+                      O e-mail informado precisa ser o mesmo utilizado no formulário
+                      de contato e cadastrado para acesso ao AutoSITEduc.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>E-mail diferente do cadastro</h4>
+                    <p>
+                      Caso seja informado um endereço diferente, o acesso não será
+                      autorizado e a seguinte mensagem poderá ser apresentada:
+                    </p>
+                    <blockquote>Verifique o e-mail digitado.</blockquote>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-substitui-sigeduc"
+                data-help-item
+                data-search="substitui sigeduc frequência conteúdos avaliações notas consultar verificar portal docente"
+              >
+                <summary>O AutoSITEduc substitui o SIGeduc?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    <strong>Não.</strong> O AutoSITEduc é uma ferramenta de apoio
+                    desenvolvida para facilitar tarefas repetitivas da rotina docente.
+                  </p>
+
+                  <section class="help-message help-message-info">
+                    <h4>O que o AutoSITEduc auxilia</h4>
+                    <ul>
+                      <li>carregamento das informações das turmas;</li>
+                      <li>cadastro de avaliações;</li>
+                      <li>digitação e importação de notas;</li>
+                      <li>lançamento de notas no SIGeduc.</li>
+                    </ul>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>O que continua sendo feito no SIGeduc</h4>
+                    <p>
+                      O lançamento da frequência e o cadastro dos conteúdos continuam
+                      sendo realizados diretamente no SIGeduc.
+                    </p>
+                  </section>
+
+                  <p>
+                    O professor também pode continuar acessando o SIGeduc normalmente
+                    para consultar informações e confirmar se as operações realizadas
+                    pelo AutoSITEduc foram registradas corretamente.
+                  </p>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-precisa-internet"
+                data-help-item
+                data-search="internet conexão rede wifi plurall escola instável sigeduc online"
+              >
+                <summary>É necessário ter acesso à internet para usar o AutoSITEduc?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    <strong>Sim.</strong> Assim como o SIGeduc, o AutoSITEduc precisa
+                    de acesso à internet para consultar e enviar informações.
+                  </p>
+
+                  <section class="help-message help-message-info">
+                    <h4>Utilize uma conexão estável</h4>
+                    <p>
+                      Uma conexão estável reduz o risco de interrupções durante o
+                      carregamento de dados, o cadastro de avaliações e o lançamento
+                      de notas.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Uso da internet da escola</h4>
+                    <p>
+                      Caso a rede Plurall apresente lentidão ou dificuldade de acesso
+                      ao SIGeduc, experimente utilizar outra conexão disponível, como
+                      uma rede Wi-Fi alternativa ou o compartilhamento de internet
+                      do celular.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-mais-de-um-computador"
+                data-help-item
+                data-search="mais de um computador vários computadores notebook instalação dados locais sincronização"
+              >
+                <summary>Posso usar o AutoSITEduc em mais de um computador?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    <strong>Sim.</strong> O AutoSITEduc pode ser instalado e utilizado
+                    em mais de um computador.
+                  </p>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Os dados são armazenados separadamente</h4>
+                    <p>
+                      As informações carregadas pelo aplicativo ficam armazenadas
+                      localmente em cada computador. Por isso, os dados de uma instalação
+                      não são sincronizados automaticamente com outra.
+                    </p>
+                  </section>
+
+                  <p>
+                    Ao utilizar um novo computador, será necessário carregar novamente
+                    as informações das turmas e dos alunos.
+                  </p>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-armazenamento-dados"
+                data-help-item
+                data-search="armazena dados professor alunos turmas escolas turnos privacidade criptografia banco de dados envio local"
+              >
+                <summary>Quais informações o AutoSITEduc armazena?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    O AutoSITEduc armazena localmente, no computador em que foi
+                    instalado, somente as informações necessárias para executar
+                    suas funcionalidades.
+                  </p>
+
+                  <section class="help-message help-message-info">
+                    <h4>Informações armazenadas no computador</h4>
+                    <ul>
+                      <li>escolas em que o professor leciona;</li>
+                      <li>turnos, turmas e disciplinas;</li>
+                      <li>nomes e informações dos alunos;</li>
+                      <li>avaliações carregadas ou cadastradas;</li>
+                      <li>preferências de configuração do aplicativo.</li>
+                    </ul>
+                  </section>
+
+                  <section class="help-message help-message-success">
+                    <h4>Proteção local</h4>
+                    <p>
+                      Esses arquivos ficam vinculados ao perfil do usuário no computador
+                      e são protegidos por criptografia local.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Envio de informações</h4>
+                    <p>
+                      Os dados das turmas e dos alunos não são enviados para uma base
+                      externa do AutoSITEduc. Eles somente são transmitidos ao SIGeduc
+                      quando o professor realiza operações como o cadastro de avaliações
+                      ou o lançamento de notas.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-primeiro-acesso"
+                data-help-item
+                data-search="primeiro acesso computador novo carregar dados professor turmas alunos avaliações sincronizar atualização correção"
+              >
+                <summary>Qual é o primeiro passo ao acessar o AutoSITEduc em um computador novo?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    Ao utilizar o AutoSITEduc pela primeira vez em um computador,
+                    acesse a tela <strong>Carregar dados</strong>.
+                  </p>
+
+                  <p>Nessa tela, realize os seguintes procedimentos:</p>
+
+                  <ol>
+                    <li>carregue os seus dados;</li>
+                    <li>carregue os dados das turmas e dos alunos;</li>
+                    <li>sincronize as avaliações cadastradas no SIGeduc.</li>
+                  </ol>
+
+                  <section class="help-message help-message-info">
+                    <h4>Por que esse procedimento é necessário?</h4>
+                    <p>
+                      Essas informações são utilizadas pelo AutoSITEduc para identificar
+                      suas escolas, turnos, turmas, disciplinas, alunos e avaliações.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Atualizações do aplicativo</h4>
+                    <p>
+                      Em algumas atualizações, pode ser necessário carregar novamente
+                      uma ou mais dessas informações.
+                    </p>
+                    <p>
+                      Quando isso acontecer, o desenvolvedor informará quais etapas
+                      deverão ser repetidas.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-carregar-meus-dados"
+                data-help-item
+                data-search="carregar meus dados dados professor tela carregar dados botão carregar vinculados professor"
+              >
+                <summary>Como carregar os meus dados?</summary>
+
+                <div class="help-answer">
+                  <ol>
+                    <li>
+                      Acesse a tela <strong>Carregar dados</strong>.
+                    </li>
+                    <li>
+                      Localize a área com a mensagem:
+                      <strong>“Clique no botão abaixo para carregar os dados vinculados ao professor”</strong>.
+                    </li>
+                    <li>
+                      Clique no botão <strong>Carregar</strong>.
+                    </li>
+                    <li>
+                      Aguarde a conclusão do procedimento.
+                    </li>
+                  </ol>
+
+                  <section class="help-message help-message-success">
+                    <h4>Resultado esperado</h4>
+                    <p>
+                      Após a conclusão, o AutoSITEduc terá acesso às informações
+                      vinculadas ao seu perfil de professor no SIGeduc.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-carregar-turmas"
+                data-help-item
+                data-search="carregar dados turmas alunos escola turnos filtros marcar selecionadas barra lateral"
+              >
+                <summary>Como carregar os dados das turmas e dos alunos?</summary>
+
+                <div class="help-answer">
+                  <ol>
+                    <li>
+                      Acesse a tela <strong>Carregar dados</strong>.
+                    </li>
+                    <li>
+                      Na barra lateral esquerda, clique em
+                      <strong>Dados das turmas</strong>.
+                    </li>
+                    <li>
+                      Na área <strong>Filtros para carregar alunos</strong>,
+                      selecione a escola.
+                    </li>
+                    <li>
+                      Selecione os turnos cujas informações deseja carregar.
+                    </li>
+                    <li>
+                      Marque as turmas de interesse.
+                    </li>
+                    <li>
+                      Clique em
+                      <strong>Carregar alunos das turmas marcadas</strong>.
+                    </li>
+                    <li>
+                      Aguarde a conclusão do carregamento.
+                    </li>
+                  </ol>
+
+                  <section class="help-message help-message-info">
+                    <h4>Seleção das turmas</h4>
+                    <p>
+                      Você pode carregar apenas as turmas que pretende utilizar.
+                      Caso seja necessário, outras turmas poderão ser carregadas
+                      posteriormente.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-sincronizar-avaliacoes"
+                data-help-item
+                data-search="carregar sincronizar avaliações escola turnos turmas sigeduc barra lateral sincronização"
+              >
+                <summary>Como carregar as avaliações cadastradas no SIGeduc?</summary>
+
+                <div class="help-answer">
+                  <ol>
+                    <li>
+                      Acesse a tela <strong>Carregar dados</strong>.
+                    </li>
+                    <li>
+                      Na barra lateral esquerda, clique em
+                      <strong>Carregar avaliações</strong>.
+                    </li>
+                    <li>
+                      Na área <strong>Sincronização de avaliações</strong>,
+                      selecione a escola.
+                    </li>
+                    <li>
+                      Selecione os turnos desejados.
+                    </li>
+                    <li>
+                      Marque as turmas cujas avaliações deseja carregar.
+                    </li>
+                    <li>
+                      Desça a página e clique em
+                      <strong>Sincronizar avaliações</strong>.
+                    </li>
+                    <li>
+                      Aguarde a conclusão do procedimento.
+                    </li>
+                  </ol>
+
+                  <section class="help-message help-message-info">
+                    <h4>O que será sincronizado?</h4>
+                    <p>
+                      O AutoSITEduc consultará as avaliações existentes no SIGeduc
+                      para as turmas selecionadas e armazenará essas informações
+                      localmente.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Avaliações cadastradas recentemente</h4>
+                    <p>
+                      Caso uma avaliação tenha sido criada diretamente no SIGeduc
+                      depois da última sincronização, repita esse procedimento para
+                      atualizá-la no AutoSITEduc.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-cadastrar-avaliacoes"
+                data-help-item
+                data-search="cadastrar avaliações unidade datas valores atividades"
+              >
+                <summary>Como cadastrar avaliações?</summary>
+                <div class="help-answer">
+                  <p>Conteúdo em preparação.</p>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-lancar-notas"
+                data-help-item
+                data-search="lançar notas digitar importar planilha sigeduc"
+              >
+                <summary>Como digitar ou importar notas?</summary>
+                <div class="help-answer">
+                  <p>Conteúdo em preparação.</p>
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <details class="help-group reveal">
+            <summary>
+              <span class="help-group-title">
+                <span class="help-group-label">Problemas e soluções</span>
+                <strong>Dúvidas e mensagens do aplicativo</strong>
+              </span>
+            </summary>
+
+            <div class="help-group-content">
+              <details
+                class="help-item"
+                id="ajuda-login"
+                data-help-item
+                data-search="login acesso senha sigeduc entrar erro credenciais campos obrigatórios email não encontrado usuário bloqueado conexão vínculo"
+              >
+                <summary>Quais mensagens podem aparecer ao tentar entrar no AutoSITEduc?</summary>
+
+                <div class="help-answer">
+                  <p>
+                    Ao clicar em <strong>Entrar</strong>, o AutoSITEduc realiza três verificações:
+                  </p>
+
+                  <ol>
+                    <li>Confere se o e-mail e a senha foram preenchidos.</li>
+                    <li>Verifica se o e-mail possui autorização para usar o AutoSITEduc.</li>
+                    <li>Tenta realizar a autenticação no SIGeduc.</li>
+                  </ol>
+
+                  <p>Durante esse processo, as seguintes mensagens podem ser exibidas:</p>
+
+                  <section class="help-message help-message-warning">
+                    <h4>Campos obrigatórios</h4>
+                    <p>
+                      Essa mensagem aparece quando o e-mail ou a senha não foram preenchidos.
+                    </p>
+                    <blockquote>Informe o e-mail e a senha para continuar.</blockquote>
+                    <p>Preencha os dois campos e tente entrar novamente.</p>
+                  </section>
+
+                  <section class="help-message help-message-warning">
+                    <h4>E-mail não encontrado</h4>
+                    <p>
+                      Essa mensagem aparece quando o e-mail informado não está cadastrado
+                      na base de usuários autorizados do AutoSITEduc.
+                    </p>
+                    <blockquote>Verifique o e-mail digitado.</blockquote>
+                    <p>
+                      Confirme se o endereço foi digitado corretamente e se corresponde
+                      ao e-mail cadastrado para acesso ao AutoSITEduc.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-danger">
+                    <h4>Usuário bloqueado</h4>
+                    <p>
+                      Essa mensagem aparece quando o e-mail está cadastrado, mas o acesso
+                      ao AutoSITEduc está desativado.
+                    </p>
+                    <blockquote>Usuário bloqueado.</blockquote>
+                    <p>
+                      Entre em contato com o suporte para verificar a situação do seu acesso.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-info">
+                    <h4>Erro de conexão</h4>
+                    <p>
+                      Essa mensagem aparece quando o AutoSITEduc não consegue consultar
+                      o serviço responsável por verificar se o usuário está autorizado.
+                    </p>
+                    <blockquote>Não foi possível consultar a lista de usuários autorizados.</blockquote>
+                    <p>Isso pode acontecer por:</p>
+                    <ul>
+                      <li>falta de conexão com a internet;</li>
+                      <li>indisponibilidade temporária do serviço de autorização;</li>
+                      <li>resposta inválida ou inesperada do servidor.</li>
+                    </ul>
+                    <p>Verifique sua conexão e tente novamente após alguns instantes.</p>
+                  </section>
+
+                  <section class="help-message help-message-danger">
+                    <h4>Não foi possível iniciar o login</h4>
+                    <p>
+                      Essa mensagem aparece quando a autorização do usuário foi concluída,
+                      mas o processo de autenticação no SIGeduc não pôde ser iniciado.
+                    </p>
+                    <blockquote>Não foi possível iniciar a autenticação no SIGeduc.</blockquote>
+                    <p>
+                      Tente entrar novamente. Caso o problema continue, reinicie o
+                      AutoSITEduc e verifique sua conexão com a internet.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-danger">
+                    <h4>Erro no login do SIGeduc</h4>
+                    <p>
+                      Essa mensagem aparece quando o AutoSITEduc consegue acessar o
+                      SIGeduc, mas a autenticação não é concluída.
+                    </p>
+                    <p>O motivo apresentado pode incluir:</p>
+                    <ul>
+                      <li>usuário ou senha inválidos;</li>
+                      <li>tempo limite excedido ao acessar o SIGeduc;</li>
+                      <li>falha na confirmação do acesso ao Portal do Docente;</li>
+                      <li>problema relacionado ao vínculo selecionado;</li>
+                      <li>mensagem de erro devolvida pela página de login do SIGeduc.</li>
+                    </ul>
+                    <p>
+                      Quando o próprio SIGeduc exibe uma mensagem no painel de erros,
+                      o AutoSITEduc apresenta essa mesma informação ao usuário.
+                    </p>
+                    <p>
+                      Confirme se o usuário e a senha estão corretos e se você consegue
+                      acessar normalmente o SIGeduc pelo navegador.
+                    </p>
+                  </section>
+
+                  <section class="help-message help-message-success">
+                    <h4>Seleção de vínculo</h4>
+                    <p>
+                      Caso os dados estejam corretos e o usuário possua mais de um vínculo
+                      ativo no SIGeduc, isso não representa um erro.
+                    </p>
+                    <p>
+                      O AutoSITEduc abrirá uma tela para que o vínculo desejado seja
+                      selecionado antes de continuar.
+                    </p>
+                  </section>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-aluno-nao-aparece"
+                data-help-item
+                data-search="aluno não aparece lista turma novo estudante carregar novamente"
+              >
+                <summary>Um aluno não aparece na lista. Como resolver?</summary>
+                <div class="help-answer">
+                  <p>Conteúdo em preparação.</p>
+                </div>
+              </details>
+
+              <details
+                class="help-item"
+                id="ajuda-ordem-alunos"
+                data-help-item
+                data-search="ordem alunos diferente divergente lançamento notas nomes matrícula"
+              >
+                <summary>A ordem dos alunos está diferente. O que isso significa?</summary>
+                <div class="help-answer">
+                  <p>Conteúdo em preparação.</p>
+                </div>
+              </details>
+            </div>
+          </details>
+        </div>
+
+        <p class="help-empty" data-help-empty hidden>
+          Nenhum resultado foi encontrado. Tente pesquisar usando outras palavras.
+        </p>
       </div>
     </section>
 
