@@ -207,11 +207,10 @@
 
       continueLink.href = destinationUrl;
 
-      window.setTimeout(() => {
-        fallbackElement.classList.add("is-visible");
-      }, 2500);
-
-      window.location.replace(destinationUrl);
+      statusElement.textContent =
+        "Clique no botão abaixo para continuar com a confirmação.";
+      loaderElement.hidden = true;
+      fallbackElement.classList.add("is-visible");
     })();
   </script>
 </body>
