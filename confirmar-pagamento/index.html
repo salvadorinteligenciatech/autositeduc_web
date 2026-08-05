@@ -10,7 +10,7 @@
 
   <meta
     name="description"
-    content="Redirecionamento seguro para a confirmação administrativa de pagamento do AutoSITEduc."
+    content="Confirmação administrativa de pagamento do AutoSITEduc."
   />
 
   <meta name="robots" content="noindex, nofollow, noarchive" />
@@ -51,13 +51,16 @@
     }
 
     main {
-      width: min(100%, 520px);
+      width: min(100%, 560px);
       padding: 32px;
-      text-align: center;
-      background: rgba(12, 29, 50, 0.94);
+      background: rgba(12, 29, 50, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 18px;
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .logo-wrapper {
+      text-align: center;
     }
 
     .logo {
@@ -68,13 +71,18 @@
 
     h1 {
       margin: 0 0 12px;
+      text-align: center;
       font-size: clamp(1.6rem, 5vw, 2.2rem);
     }
 
     p {
-      margin: 0;
       color: #cbd6e5;
       line-height: 1.6;
+    }
+
+    .status {
+      margin: 0;
+      text-align: center;
     }
 
     .loader {
@@ -87,28 +95,88 @@
       animation: girar 0.8s linear infinite;
     }
 
-    .fallback {
+    .details {
       display: none;
       margin-top: 24px;
     }
 
-    .fallback.is-visible {
+    .details.is-visible {
       display: block;
     }
 
+    .customer-data {
+      margin: 22px 0;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 10px;
+      line-height: 1.8;
+    }
+
+    .customer-data strong {
+      color: #fff;
+    }
+
+    .warning {
+      padding: 13px 15px;
+      background: rgba(255, 193, 7, 0.13);
+      border: 1px solid rgba(255, 193, 7, 0.35);
+      border-radius: 9px;
+      color: #ffe7a3;
+    }
+
     .button {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 13px 20px;
-      color: #07111f;
-      background: #70bdff;
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px 20px;
+      border: 0;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
+      background: #70bdff;
+      color: #07111f;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      filter: brightness(1.06);
+    }
+
+    .button:disabled {
+      cursor: wait;
+      opacity: 0.65;
     }
 
     .error {
       color: #ffd6d6;
+    }
+
+    .success {
+      color: #9ce8bd;
+    }
+
+    .success-panel {
+      display: none;
+      margin-top: 22px;
+      text-align: center;
+    }
+
+    .success-panel.is-visible {
+      display: block;
+    }
+
+    .success-icon {
+      margin-bottom: 10px;
+      color: #58d68d;
+      font-size: 54px;
+      line-height: 1;
+    }
+
+    .technical-note {
+      margin-top: 20px;
+      color: #93a6bd;
+      font-size: 0.82rem;
+      text-align: center;
     }
 
     @keyframes girar {
@@ -127,29 +195,67 @@
 
 <body>
   <main>
-    <img
-      class="logo"
-      src="../assets/logo-autositeduc.png"
-      alt="AutoSITEduc"
-    />
+    <div class="logo-wrapper">
+      <img
+        class="logo"
+        src="../assets/logo-autositeduc.png"
+        alt="AutoSITEduc"
+      />
+    </div>
 
-    <h1>Preparando a confirmação</h1>
+    <h1 id="title">Confirmar pagamento</h1>
 
-    <p id="status">
-      Aguarde enquanto abrimos a página segura de confirmação do pagamento.
+    <p class="status" id="status" aria-live="polite">
+      Carregando os dados da solicitação...
     </p>
 
     <div class="loader" id="loader" aria-hidden="true"></div>
 
-    <div class="fallback" id="fallback">
-      <p>
-        O redirecionamento não ocorreu automaticamente.
+    <section class="details" id="details">
+      <div class="customer-data">
+        <strong>Cliente:</strong>
+        <span id="customer-name"></span>
+        <br />
+
+        <strong>E-mail:</strong>
+        <span id="customer-email"></span>
+        <br />
+
+        <strong>Plano:</strong>
+        <span id="customer-plan"></span>
+        <br />
+
+        <strong>Modalidade:</strong>
+        <span id="customer-modality"></span>
+        <br />
+
+        <strong>Valor:</strong>
+        <span id="customer-value"></span>
+      </div>
+
+      <p class="warning">
+        Confirme somente após verificar o comprovante do PIX.
       </p>
 
-      <a class="button" id="continue-link" href="#">
-        Continuar para a confirmação
-      </a>
-    </div>
+      <button class="button" id="confirm-button" type="button">
+        Confirmar e liberar acesso
+      </button>
+    </section>
+
+    <section class="success-panel" id="success-panel">
+      <div class="success-icon" aria-hidden="true">✓</div>
+
+      <h2>Pagamento confirmado</h2>
+
+      <p>
+        O acesso foi liberado e o e-mail de boas-vindas foi enviado.
+      </p>
+
+      <p class="technical-note">
+        Esta página já pode ser fechada.
+      </p>
+    </section>
+
   </main>
 
   <script>
@@ -161,56 +267,305 @@
         + "AKfycbzj-u-xc7PQuW1xqw35S5HfOnyrjJ79xbZoBA_rTdckVNKLZv8hfI8OSUvJvY0huHcK"
         + "/exec";
 
-      const allowedActions = new Set([
-        "confirm_payment",
-        "execute_payment_confirmation",
-      ]);
+      const API_SOURCE = "autositeduc_payment_api";
+      const MAX_STATUS_ATTEMPTS = 20;
+      const STATUS_INTERVAL_MS = 1500;
 
-      const sourceParams = new URLSearchParams(window.location.search);
+      const sourceParams =
+        new URLSearchParams(window.location.search);
 
-      const action = (sourceParams.get("action") || "").trim();
+      const action =
+        (sourceParams.get("action") || "").trim();
+
       const submissionId =
         (sourceParams.get("submission_id") || "").trim();
+
       const signature =
         (sourceParams.get("signature") || "").trim();
 
-      const statusElement = document.getElementById("status");
-      const loaderElement = document.getElementById("loader");
-      const fallbackElement = document.getElementById("fallback");
-      const continueLink = document.getElementById("continue-link");
+      const titleElement =
+        document.getElementById("title");
+
+      const statusElement =
+        document.getElementById("status");
+
+      const loaderElement =
+        document.getElementById("loader");
+
+      const detailsElement =
+        document.getElementById("details");
+
+      const successPanelElement =
+        document.getElementById("success-panel");
+
+      const confirmButton =
+        document.getElementById("confirm-button");
+
+      let customerData = null;
+      let statusAttempts = 0;
+
+      function setError(message) {
+        loaderElement.hidden = true;
+        detailsElement.classList.remove("is-visible");
+        successPanelElement.classList.remove("is-visible");
+
+        statusElement.textContent = message;
+        statusElement.classList.remove("success");
+        statusElement.classList.add("error");
+
+        confirmButton.disabled = false;
+      }
+
+      function setLoading(message) {
+        statusElement.textContent = message;
+        statusElement.classList.remove("error", "success");
+        loaderElement.hidden = false;
+      }
+
+      function setSuccess() {
+        loaderElement.hidden = true;
+        detailsElement.classList.remove("is-visible");
+
+        titleElement.textContent = "Pagamento confirmado";
+
+        statusElement.textContent =
+          "Operação concluída com sucesso.";
+
+        statusElement.classList.remove("error");
+        statusElement.classList.add("success");
+
+        successPanelElement.classList.add("is-visible");
+      }
+
+      function fillCustomerData(data) {
+        document.getElementById("customer-name").textContent =
+          data.name || "—";
+
+        document.getElementById("customer-email").textContent =
+          data.email || "—";
+
+        document.getElementById("customer-plan").textContent =
+          data.commercialName || "—";
+
+        document.getElementById("customer-modality").textContent =
+          data.modality || "—";
+
+        document.getElementById("customer-value").textContent =
+          data.formattedValue || "—";
+      }
+
+      async function requestPaymentData(onComplete) {
+        try {
+          const requestUrl = new URL(PUBLIC_WEB_APP_URL);
+
+          requestUrl.searchParams.set("api", "payment");
+          requestUrl.searchParams.set(
+            "action",
+            "confirm_payment",
+          );
+          requestUrl.searchParams.set(
+            "submission_id",
+            submissionId,
+          );
+          requestUrl.searchParams.set(
+            "signature",
+            signature,
+          );
+          requestUrl.searchParams.set(
+            "_",
+            String(Date.now()),
+          );
+
+          const response = await fetch(
+            requestUrl.toString(),
+            {
+              method: "GET",
+              mode: "cors",
+              credentials: "omit",
+              cache: "no-store",
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Falha na consulta: HTTP ${response.status}.`,
+            );
+          }
+
+          const payload = await response.json();
+
+          if (
+            !payload
+            || payload.source !== API_SOURCE
+          ) {
+            throw new Error(
+              "A resposta recebida é inválida.",
+            );
+          }
+
+          if (!payload.ok) {
+            throw new Error(
+              payload.error
+              || "A operação não pôde ser concluída.",
+            );
+          }
+
+          onComplete(null, payload.data || {});
+        } catch (error) {
+          onComplete(
+            new Error(
+              error && error.message
+                ? error.message
+                : "Não foi possível acessar o serviço de confirmação.",
+            ),
+          );
+        }
+      }
+
+      function showReview(data) {
+        customerData = data;
+
+        if (
+          data.paymentStatus === "confirmado"
+          && data.welcomeStatus === "enviada"
+        ) {
+          setSuccess();
+          return;
+        }
+
+        fillCustomerData(data);
+
+        if (!data.executeSignature) {
+          setError(
+            "Não foi possível preparar a autorização da confirmação.",
+          );
+          return;
+        }
+
+        loaderElement.hidden = true;
+
+        statusElement.textContent =
+          "Revise os dados antes de liberar o acesso.";
+
+        detailsElement.classList.add("is-visible");
+      }
+
+      function pollConfirmationStatus() {
+        requestPaymentData((error, data) => {
+          if (error) {
+            setError(error.message);
+            return;
+          }
+
+          if (
+            data.paymentStatus === "confirmado"
+            && data.welcomeStatus === "enviada"
+          ) {
+            setSuccess();
+            return;
+          }
+
+          statusAttempts += 1;
+
+          if (statusAttempts >= MAX_STATUS_ATTEMPTS) {
+            setError(
+              "A confirmação foi enviada, mas o resultado ainda não foi identificado. Recarregue esta página para consultar novamente.",
+            );
+            return;
+          }
+
+          window.setTimeout(
+            pollConfirmationStatus,
+            STATUS_INTERVAL_MS,
+          );
+        });
+      }
+
+      function executePaymentConfirmation() {
+        if (
+          !customerData
+          || !customerData.executeSignature
+        ) {
+          setError(
+            "Os dados da confirmação não estão disponíveis.",
+          );
+          return;
+        }
+
+        confirmButton.disabled = true;
+
+        detailsElement.classList.remove("is-visible");
+
+        setLoading(
+          "Confirmando o pagamento e liberando o acesso...",
+        );
+
+        const requestBody = new URLSearchParams();
+
+        requestBody.set("api", "payment");
+        requestBody.set(
+          "action",
+          "execute_payment_confirmation",
+        );
+        requestBody.set(
+          "submission_id",
+          submissionId,
+        );
+        requestBody.set(
+          "signature",
+          customerData.executeSignature,
+        );
+
+        fetch(
+          PUBLIC_WEB_APP_URL,
+          {
+            method: "POST",
+            mode: "no-cors",
+            credentials: "omit",
+            cache: "no-store",
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body: requestBody.toString(),
+          },
+        ).catch(() => {
+          // A resposta é opaca em no-cors.
+          // O resultado real é verificado por polling JSONP.
+        });
+
+        statusAttempts = 0;
+
+        window.setTimeout(
+          pollConfirmationStatus,
+          STATUS_INTERVAL_MS,
+        );
+      }
 
       if (
-        !allowedActions.has(action)
+        action !== "confirm_payment"
         || !submissionId
         || !signature
       ) {
-        statusElement.textContent =
-          "Este link de confirmação está incompleto ou é inválido.";
-        statusElement.classList.add("error");
-        loaderElement.hidden = true;
+        setError(
+          "Este link de confirmação está incompleto ou é inválido.",
+        );
         return;
       }
 
-      const destination = new URL(PUBLIC_WEB_APP_URL);
-
-      destination.searchParams.set("action", action);
-      destination.searchParams.set(
-        "submission_id",
-        submissionId,
-      );
-      destination.searchParams.set(
-        "signature",
-        signature,
+      confirmButton.addEventListener(
+        "click",
+        executePaymentConfirmation,
       );
 
-      const destinationUrl = destination.toString();
+      requestPaymentData((error, data) => {
+        if (error) {
+          setError(error.message);
+          return;
+        }
 
-      continueLink.href = destinationUrl;
-
-      statusElement.textContent =
-        "Clique no botão abaixo para continuar com a confirmação.";
-      loaderElement.hidden = true;
-      fallbackElement.classList.add("is-visible");
+        showReview(data);
+      });
     })();
   </script>
 </body>
