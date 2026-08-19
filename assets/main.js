@@ -58,6 +58,29 @@ function scrollTutorials(direction) {
 tutorialPrev?.addEventListener('click', () => scrollTutorials(-1));
 tutorialNext?.addEventListener('click', () => scrollTutorials(1));
 
+const testimonialTrack = document.querySelector('[data-testimonial-track]');
+const testimonialPrev = document.querySelector('[data-testimonial-prev]');
+const testimonialNext = document.querySelector('[data-testimonial-next]');
+
+function scrollTestimonials(direction) {
+  if (!testimonialTrack) return;
+
+  const firstCard = testimonialTrack.querySelector('.testimonial-card');
+  const styles = window.getComputedStyle(testimonialTrack);
+  const gap = Number.parseFloat(styles.columnGap || styles.gap || '0');
+  const distance = firstCard
+    ? firstCard.getBoundingClientRect().width + gap
+    : testimonialTrack.clientWidth * 0.88;
+
+  testimonialTrack.scrollBy({
+    left: direction * distance,
+    behavior: 'smooth',
+  });
+}
+
+testimonialPrev?.addEventListener('click', () => scrollTestimonials(-1));
+testimonialNext?.addEventListener('click', () => scrollTestimonials(1));
+
 function getBahiaDateParts(date = new Date()) {
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Bahia',
